@@ -5,7 +5,7 @@ from datetime import datetime
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key= True)
     by = db.Column(db.String(150), nullable= True)
-    item_hnid = db.Column(db.Float, unique = True, nullable= False)
+    item_hnid = db.Column(db.Integer, unique= True, nullable= False)
     title = db.Column(db.String(300))
     time = db.Column(db.DateTime)
     text = db.Column(db.Text)
