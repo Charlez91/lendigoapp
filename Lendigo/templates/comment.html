@@ -7,25 +7,42 @@
                 <input class="search-input" name="query"  id="txtSearch" placeholder="Search here" >
                 <button class="search-btn1" >Search</button>
             </form>
+            <a class="btn search-btn" href="{{url_for('home')}}" >All</a>
+            <a class="btn search-btn" href="{{url_for('story')}}" >Story</a>
+            <a class="btn search-btn search-btn-active" href="{{url_for('comment')}}">Comment</a>
+            <a class="btn search-btn" href="{{url_for('poll')}}">Poll</a>
+            <a class="btn search-btn" href="{{url_for('job')}}">Job</a>
             <span id="SearchResult"></span>
         </div>
     </div>
     <!-- END SEARCH BAR -->
     <div class="col-md-8">
-        {% for item in items: %}
+        {% for item in items.items: %}
             <article class="media content-section">
                 <img class="rounded-circle account-img" src="{{url_for('static', filename='profile_pics/default.jpg')}}">
                 <div class="media-body">
                     <div class="article-metadata">
                         <a class="mr-2" href="#">{{ item.by }}</a>
-                        <small class="text-muted">HNId: {{item.item_hnid}}</small>
+                        <small class="text-muted">Id: {{item.item_hnid}}</small>
                         <small class="text-muted">Type: {{item.item_type}}</small>
-                        <small class="text-muted">{{ item.time.strftime('%Y-%m-%d %H:%M')}}</small>
+                        <small class="text-muted">Date: {{ item.time.strftime('%Y-%m-%d %H:%M')}}</small>
                     </div>
                     <h2><a class="article-title" href="{{url_for('item', item_id= item.id)}}">{{ item.title }}</a></h2>
                     <p class="article-content">{{ item.text }}</p>
                 </div>
             </article>
         {% endfor %}
+    {% for page_num in items.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=3)%}
+	{% if page_num %}
+		{% if items.page==page_num%}
+			<a class="btn btn-danger mb-4" href="{{url_for ('home', page=page_num)}}">{{ page_num }}</a>
+		{% else %}
+			<a class="btn btn-outline-info mb-4" href="{{url_for ('home', page=page_num)}}">{{ page_num }}</a>
+		{% endif %}
+	{% else %}
+	...
+	{% endif %}
+
+	{% endfor%}
     </div>
 {% endblock content %}

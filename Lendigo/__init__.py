@@ -16,7 +16,6 @@ celery = make_celery(app)
 
 from Lendigo.models import Item #after running on first instance these can be deleted
 db.create_all()
-#db.drop_all()
 db.session.commit()
 
 from Lendigo.errors.handlers import errors

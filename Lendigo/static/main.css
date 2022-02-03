@@ -99,9 +99,10 @@ a.article-title:hover {
   border: 1px var(--border-color) solid;
   margin-left: -5px;
   padding: 5px 0px 4px 10px;
+  
 }
 
-.search-btn{
+.search-btn1{
   border: 1px var(--border-color) solid;
   padding: 5px 5px 4px 10px;
   margin-left: -6px;
@@ -111,8 +112,28 @@ a.article-title:hover {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 990px) {
 
+.search-btn{
+  min-width: 50px;
+  border: none; /* 1px var(--border-color) solid; */
+  padding: 0px 5px 0px 5px;
+  margin: 10px 2% 0px 0px;
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-btn-active{
+  border-bottom: 1px var(--border-color) solid ;
+  font-weight: bold;
+}
+
+button: hover{
+  border-bottom: 1px var(--border-color) solid ;
+}
+
+@media only screen and (max-width: 990px) {
+/*
   .search-select{
     width: 15%;
     min-width: 60px;
@@ -124,7 +145,7 @@ a.article-title:hover {
     width: 15%;
     min-width: 60px;
   }
-  
+  */
 }
 
 /*::::::END SEARCH ::::::*/

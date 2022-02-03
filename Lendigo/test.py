@@ -77,7 +77,7 @@ def concurrent_requests_last100():
                 out.append(response.json())
                 x = response.json()
                 #print(x)
-        with open('lend.json', 'w+') as f:
+        with open('lend.json', 'a') as f:
             json.dump(out, f)
             f.close
         time2 = time.time()
@@ -127,7 +127,7 @@ def items_5mins_apart():
                 out.append(response.json())
                 x = response.json()
                 #print(x)
-        with open('lend.json', 'w+') as f:
+        with open('lend.json', 'a') as f:
             json.dump(out, f)
             f.close
         time2 = time.time()
@@ -175,7 +175,7 @@ def concurrent_requests_last100stories():
                 out.append(response.json())
                 x = response.json()
                 #print(x)
-        with open('lend.json', 'w+') as f:
+        with open('lend.json', 'a') as f:
             json.dump(out, f)
             f.close
         time2 = time.time()
@@ -224,7 +224,7 @@ def items_5mins_apartstories():
                 out.append(response.json())
                 x = response.json()
                 #print(x)
-        with open('lend.json', 'w+') as f:
+        with open('lend.json', 'a') as f:
             json.dump(out, f)
             f.close
         time2 = time.time()
@@ -263,12 +263,3 @@ def load_items():
             db.session.commit()
             #print(items)#comment out for my flaskapp
 
-def scheduling():    
-    #update db with last 100 items
-    load_100items()
-    #scheduling the db every 5 minutes syncing
-    schedule.clear()#clear up all old session when i shut down the flask app or restarted in debug
-    schedule.every(5).minutes.do(load_items)
-    while True:
-        schedule.run_pending()
-        time.sleep(1)

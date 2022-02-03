@@ -4,18 +4,15 @@
     <div class="col-md-6" >
         <div class="header-search">
             <form id="SearchForm" method="GET" action="{{url_for('search')}}">
-                <select class="search-select" id="sltFilterSearch">
-                    <option value="">Filter</option>
-                    <option value="Type 1" >Type </option>
-                    <option value="Type 2" >item_hnid</option>
-                    <option value="Type 3" >Text</option>
-                    <option value="Type 4" >Title</option>
-                    <option value="Type 5" >by(author)</option>
-                </select>
                 <input class="search-input" name="query"  id="txtSearch" placeholder="Search here" >
-                <button class="search-btn" >Search</button>
-                <span id="SearchResult"></span>
+                <button class="search-btn1" >Search</button>
             </form>
+            <a class="btn search-btn search-btn-active" href="{{url_for('home')}}" >All</a>
+            <a class="btn search-btn" href="{{url_for('story')}}" >Story</a>
+            <a class="btn search-btn" href="{{url_for('comment')}}">Comment</a>
+            <a class="btn search-btn" href="{{url_for('poll')}}">Poll</a>
+            <a class="btn search-btn" href="{{url_for('job')}}">Job</a>
+            <span id="SearchResult"></span>
         </div>
     </div>
     <!-- END SEARCH BAR -->
@@ -26,9 +23,9 @@
                 <div class="media-body">
                     <div class="article-metadata">
                         <a class="mr-2" href="#">{{ item.by }}</a>
-                        <small class="text-muted">HNId: {{item.item_hnid}}</small>
+                        <small class="text-muted">Id: {{item.item_hnid}}</small>
                         <small class="text-muted">Type: {{item.item_type}}</small>
-                        <small class="text-muted">{{ item.time.strftime('%Y-%m-%d %H:%M')}}</small>
+                        <small class="text-muted">Date: {{ item.time.strftime('%Y-%m-%d %H:%M')}}</small>
                     </div>
                     <h2><a class="article-title" href="{{url_for('item', item_id= item.id)}}">{{ item.title }}</a></h2>
                     <p class="article-content">{{ item.text }}</p>

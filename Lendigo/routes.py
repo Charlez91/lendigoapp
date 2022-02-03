@@ -42,12 +42,12 @@ def run_continuously(interval=300):# or you can set a background threading event
     continuous_thread.start()
     return cease_continuous_run
 
-load_100items()#initial run of getting the last 100 items
-schedule.every(5).minutes.do(load_items)#every 5 mins syncing to db
+#load_100items()#initial run of getting the last 100 items and syncing to db
+#schedule.every(5).minutes.do(load_items)#every 5 mins syncing to db
 #Start the background thread
-stop_run_continuously = run_continuously()
+#stop_run_continuously = run_continuously()
 #Do some other things...
-time.sleep(10)
+#time.sleep(10)
 # Stop the background thread
 #stop_run_continuously.set()
 
@@ -79,10 +79,34 @@ def search():
 									Item.title.contains(q)| Item.text.contains(q))
     return render_template ('search.html', items=items)
 
+@app.route('/story')
+def story():
+    page = request.args.get('page', 1, type=int)
+    items = Item.query.order_by(Item.time.desc()).filter_by(item_type="story").paginate(page= page, per_page=5)
+    return render_template ('story.html', items=items)
+
+@app.route('/comment')
+def comment():
+    page = request.args.get('page', 1, type=int)
+    items = Item.query.order_by(Item.time.desc()).filter_by(item_type="comment").paginate(page= page, per_page=5)
+    return render_template ('comment.html', items=items)
+
+@app.route('/poll')
+def poll():
+    page = request.args.get('page', 1, type=int)
+    items = Item.query.order_by(Item.time.desc()).filter_by(item_type="poll").paginate(page= page, per_page=5)
+    return render_template ('poll.html', items=items)
+
+@app.route('/job')
+def job():
+    page = request.args.get('page', 1, type=int)
+    items = Item.query.order_by(Item.time.desc()).filter_by(item_type="job").paginate(page= page, per_page=5)
+    return render_template ('job.html', items=items)
+
 @app.route("/item/<int:item_id>", methods=['GET', 'POST'])
-def post(item_id):
-	items = Item.query.get_or_404(item_id)
-	return render_template('item.html', items=items)
+def item(item_id):
+	item = Item.query.get_or_404(item_id)
+	return render_template('item.html', item=item)
 
 
 #gets all the items on the db. Post posts to the db
