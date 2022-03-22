@@ -13,7 +13,7 @@ from Lendigo.test import *
 
 
 #celery schedule for async task of scheduling
-@celery.task()
+@celery.task(name='scheduling')
 def scheduling():    
     #update db with last 100 items
     load_100items()
